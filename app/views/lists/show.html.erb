@@ -1,9 +1,28 @@
-<h1><%= @list.name %></h1>
-<% @list.bookmarks.each do |bookmark| %>
-<%= bookmark.comment %>
-<%= bookmark.movie.title %>
-<%= bookmark.movie.overview %>
-<%= bookmark.movie.rating %>
+
+
+<% if @list.photo.attached? %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path @list.photo.key %>')">
+    <div class="container">
+      <h1><strong><%=@list.name%><strong></h1>
+      <p><div><% @list.bookmarks.each do |bookmark| %>
+            <%= bookmark.comment %>
+            <%= bookmark.movie.title %>
+            <%= bookmark.movie.overview %>
+            <%= bookmark.movie.rating %>
+            <% end %>
+          </div>
+      </p>
+
+    </div>
+  </div>
+<% else %>
+  <% @list.bookmarks.each do |bookmark| %>
+      <%= bookmark.comment %>
+      <%= bookmark.movie.title %>
+      <%= bookmark.movie.overview %>
+      <%= bookmark.movie.rating %>
+  <% end %>
 <% end %>
 <%= link_to "back to the list", lists_path %>
 <%= link_to "add bookmark", new_list_bookmark_path(@list) %>
+

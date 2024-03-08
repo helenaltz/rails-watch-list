@@ -13,3 +13,10 @@ Movie.create(title: "Titanic", overview: "101-year-old Rose DeWitt Bukater tells
 Movie.create(title: "Ocean's Eight", overview: "Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century.", poster_url: "https://image.tmdb.org/t/p/original/MvYpKlpFukTivnlBhizGbkAe3v.jpg", rating: 7.0)
 
 List.create(name: "favourite")
+
+require "open-uri"
+
+file = URI.open("https://unsplash.com/fr/photos/decoration-murale-damour-rouge-et-blanc-60GsdOMRFGc")
+list = List.new(title: "favourite", body: "heart")
+list.photo.attach(io: file, filename: "favourite.png", content_type: "image/png")
+list.save

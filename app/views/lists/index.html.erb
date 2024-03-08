@@ -1,8 +1,18 @@
 <h1> LISTS </h1>
 <ul>
   <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
+    <% if list.photo.attached? %>
+      <div class="card-product">
+        <%= cl_image_tag list.photo.key, height: 30 %>
+        <div class="card-product-infos">
+          <li><%= link_to list.name, list_path(list) %></li>
+          <p>Product description with <strong>relevant info</strong> only.</p>
+        </div>
+      </div>
+    <% else%>
+        <li><%= link_to list.name, list_path(list) %></li>
+
+    <% end %>
   <% end %>
 </ul>
 <%= link_to "add list", new_list_path %>
-
